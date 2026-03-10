@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: '*', allow: '/' },
       { userAgent: 'Googlebot', allow: '/' },
     ],
-    sitemap: 'https://syed-akhter-hussain-port.vercel.app/sitemap.xml',
-    host: 'https://syed-akhter-hussain-port.vercel.app',
+    sitemap: 'https://www.syedakhterhussain.online/sitemap.xml',
+    host: 'https://www.syedakhterhussain.online/',
   }
 }

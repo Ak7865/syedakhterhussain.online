@@ -21,7 +21,7 @@ export const personal = {
   age: '24',
   degree: 'B.Tech CSE',
   freelance: true,
-  portfolio: 'https://syed-akhter-hussain-port.vercel.app/',
+  portfolio: 'https://www.syedakhterhussain.online/',
   github: 'https://github.com/Ak7865',
   company: '8BitBannar',
   companyUrl: 'https://8bitbannar.in/',
@@ -201,7 +201,7 @@ export const projects = [
     lang: 'JS / HTML / CSS',
     langColor: '#f1e05a',
     badge: '🚀 Deployed',
-    link: 'https://syed-akhter-hussain-port.vercel.app/',
+    link: 'https://www.syedakhterhussain.online/',
   },
   {
     icon: '🎮',

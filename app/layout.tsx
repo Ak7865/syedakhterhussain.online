@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-const SITE_URL = 'https://syed-akhter-hussain-port.vercel.app'
+const SITE_URL = 'https://www.syedakhterhussain.online/'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://syed-akhter-hussain-port.vercel.app'),
+  metadataBase: new URL('https://www.syedakhterhussain.online/'),
   title: {
     default: 'Syed Akhter Hussain | Web Developer in Nagaon, Assam',
     template: '%s | Syed Akhter Hussain',
