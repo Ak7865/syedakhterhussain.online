@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       'Professional web developer in Nagaon, Assam. React · PHP · Node.js · Firebase · MySQL. Founder of 8BitBannar. Available for freelance across India.',
     images: [
       {
-        url: `${SITE_URL}/opengraph-image`,
+        url: `${SITE_URL}/og-banner.png`,
         width: 1200,
         height: 630,
         alt: 'Syed Akhter Hussain — Full Stack Web Developer, Nagaon Assam',
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Syed Akhter Hussain | Web Developer — Nagaon, Assam',
     description: 'Full Stack Web Developer from Nagaon, Assam. React, PHP, Node.js, Firebase. Founder of 8BitBannar.',
-    images: [`${SITE_URL}/opengraph-image`],
+    images: [`${SITE_URL}/og-banner.png`],
   },
 }
 
@@ -200,7 +200,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* WhatsApp reads these directly — must be explicit */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:type" content="https://syedakhterhussain.online/og-banner.png" />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Syed Akhter Hussain | Web Developer in Nagaon, Assam" />
+        
 
         {/* Geo meta — local search ranking boost */}
         <meta name="geo.region" content="IN-AS" />
@@ -212,7 +216,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="alternate" hrefLang="en-IN" href={SITE_URL} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body>{children}</body>
+      <body>{children}
+        <script type='application/ld+json' dangerouslySetInnerHTML={{
+          __html:JSON.stringify([
+            personSchema,
+            localBusinessSchema,
+            websiteSchema,
+          ]),
+        }}>
+          
+        </script>
+      </body>
     </html>
   )
 }
