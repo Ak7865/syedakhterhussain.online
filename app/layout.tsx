@@ -76,7 +76,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Syed Akhter Hussain | Web Developer — Nagaon, Assam',
     description: 'Full Stack Web Developer from Nagaon, Assam. React, PHP, Node.js, Firebase. Founder of 8BitBannar.',
-    images: [`${SITE_URL}/og-banner.png`],
+    images: [
+      {
+        url: "https://www.syedakhterhussain.online/og-banner.png",
+        width: 1200,
+        height: 630,
+        alt:"Syed Akhter Hussain — Full Stack Web Developer, Nagaon, Assam",
+        type: "image/png",
+      },  
+    ],
   },
 }
 
@@ -93,7 +101,7 @@ const personSchema = {
   url: SITE_URL,
   image: {
     '@type': 'ImageObject',
-    url: `${SITE_URL}/syed-akhter-hussain.jpeg`,
+    url: "https://www.syedakhterhussain.online/syed-akhter-hussain.jpeg",
     width: 800,
     height: 800,
   },
@@ -201,7 +209,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="https://syedakhterhussain.online/og-banner.png" />
-        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:url" content="https://www.syedakhterhussain.online" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Syed Akhter Hussain | Web Developer in Nagaon, Assam" />
         
