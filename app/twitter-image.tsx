@@ -22,7 +22,7 @@ export default async function Image() {
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, #3fb950, #58a6ff, #bc8cff)', display: 'flex' }} />
         <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', padding: '60px 72px', flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '36px', marginBottom: '40px' }}>
-            <div style={{ width: '110px', height: '110px', borderRadius: '50%', background: 'linear-gradient(135deg, #21262d, #30363d)', border: '3px solid #3fb950', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '44px', flexShrink: 0 }}>👨‍💻</div>
+            <img style={{ width: '110px', height: '110px', borderRadius: '50%', border: '3px solid #3fb950', objectFit: 'cover', flexShrink: 0 }} src="https://www.syedakhterhussain.online/syed-akhter-hussain.jpg" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(63,185,80,0.12)', border: '1px solid rgba(63,185,80,0.35)', padding: '4px 14px', borderRadius: '20px', width: 'fit-content' }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3fb950', display: 'flex' }} />
@@ -37,7 +37,7 @@ export default async function Image() {
           </div>
           <div style={{ display: 'flex', gap: '28px', marginBottom: '36px' }}>
             {[{ icon: '📍', text: 'Nagaon, Assam, India' }, { icon: '🏢', text: '8BitBannar WebTech' }, { icon: '🎓', text: 'B.Tech CSE — BVEC' }].map(({ icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.04)', border: '1px solid #30363d', padding: '8px 16px', borderRadius: '8px' }}>
+              <div key={String(text)} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.04)', border: '1px solid #30363d', padding: '8px 16px', borderRadius: '8px' }}>
                 <span style={{ fontSize: '16px' }}>{icon}</span>
                 <span style={{ color: '#8b949e', fontSize: '15px' }}>{text}</span>
               </div>
@@ -50,7 +50,7 @@ export default async function Image() {
           </div>
         </div>
         <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 72px', borderTop: '1px solid #21262d', background: 'rgba(22,27,34,0.8)' }}>
-          <span style={{ color: '#6e7681', fontSize: '14px', fontFamily: 'monospace', display: 'flex' }}>syed-akhter-hussain-port.vercel.app</span>
+          <span style={{ color: '#6e7681', fontSize: '14px', fontFamily: 'monospace', display: 'flex' }}>syedakhterhussain.online</span>
           <span style={{ color: '#3fb950', fontSize: '14px', display: 'flex' }}>github.com/Ak7865 · 8bitbannar.in</span>
         </div>
       </div>

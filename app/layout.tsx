@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-const SITE_URL = 'https://www.syedakhterhussain.online/'
+const SITE_URL = 'https://syedakhterhussain.online'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.syedakhterhussain.online/'),
+  metadataBase: new URL('https://syedakhterhussain.online'),
   title: {
     default: 'Syed Akhter Hussain | Web Developer in Nagaon, Assam',
     template: '%s | Syed Akhter Hussain',
@@ -93,9 +93,9 @@ const personSchema = {
   url: SITE_URL,
   image: {
     '@type': 'ImageObject',
-    url: `${SITE_URL}/opengraph-image`,
-    width: 1200,
-    height: 630,
+    url: `${SITE_URL}/syed-akhter-hussain.jpeg`,
+    width: 800,
+    height: 800,
   },
   email: 'ah076145@gmail.com',
   telephone: '+91-9127222171',

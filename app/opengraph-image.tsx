@@ -65,16 +65,12 @@ export default async function Image() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '36px', marginBottom: '40px' }}>
 
             {/* Avatar circle */}
-            <div style={{
-              width: '110px', height: '110px', borderRadius: '50%',
-              background: 'linear-gradient(135deg, #21262d, #30363d)',
-              border: '3px solid #3fb950',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '44px',
-              flexShrink: 0,
-            }}>
-              👨‍💻
-            </div>
+            <img
+              src="https://www.syedakhterhussain.online/syed-akhter-hussain.jpg"
+              width="110"
+              height="110"
+              style={{ borderRadius: '50%', border: '3px solid #3fb950', objectFit: 'cover', flexShrink: 0 }}
+            />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {/* Available badge */}
@@ -145,7 +141,7 @@ export default async function Image() {
           background: 'rgba(22,27,34,0.8)',
         }}>
           <span style={{ color: '#6e7681', fontSize: '14px', fontFamily: 'monospace', display: 'flex' }}>
-            syed-akhter-hussain-port.vercel.app
+            syedakhterhussain.online
           </span>
           <span style={{ color: '#6e7681', fontSize: '14px', display: 'flex', gap: '20px' }}>
             <span style={{ color: '#3fb950' }}>github.com/Ak7865</span>

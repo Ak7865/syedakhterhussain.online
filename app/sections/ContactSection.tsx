@@ -44,7 +44,7 @@ export default function ContactSection() {
     { icon: '✉️', title: 'Email', sub: personal.email, href: `mailto:${personal.email}` },
     { icon: '📱', title: 'Phone / WhatsApp', sub: personal.phone, href: `tel:${personal.phone}` },
     { icon: '🐱', title: 'GitHub', sub: 'github.com/Ak7865', href: personal.github },
-    { icon: '🌐', title: 'Portfolio', sub: 'syed-akhter-hussain-port.vercel.app', href: personal.portfolio },
+    { icon: '🌐', title: 'Portfolio', sub: 'syedakhterhussain.online', href: personal.portfolio },
     { icon: '🏢', title: '8BitBannar', sub: '8bitbannar.in — WebTech Company', href: personal.companyUrl },
   ]
 

@@ -12,7 +12,7 @@ function getResponse(q: string): string {
   for (const [key, val] of Object.entries(chatKB)) {
     if (l.includes(key.split(' ')[0])) return val
   }
-  return 'Great question! Best to reach Syed directly at ah076145@gmail.com or check his portfolio at syed-akhter-hussain-port.vercel.app 😊'
+  return 'Great question! Best to reach Syed directly at ah076145@gmail.com or check his portfolio at syedakhterhussain.online 😊'
 }
 
 export default function AiChat() {

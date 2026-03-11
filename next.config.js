@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['syed-akhter-hussain-port.vercel.app'],
+    domains: ['syedakhterhussain.online'],
   },
 }
 

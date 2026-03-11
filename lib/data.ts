@@ -25,7 +25,7 @@ export const personal = {
   github: 'https://github.com/Ak7865',
   company: '8BitBannar',
   companyUrl: 'https://8bitbannar.in/',
-  cvUrl: 'https://syed-akhter-hussain-port.vercel.app/assets/Syed_Akhter_Hussain_CV_2025.pdf',
+  cvUrl: 'https://www.syedakhterhussain.online/Syed_Akhter_Hussain_2026.pdf',
   stats: [
     { num: '8+', label: 'Certifications' },
     { num: '3+', label: 'Projects Built' },
