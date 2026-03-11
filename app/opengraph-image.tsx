@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 export const runtime = 'edge'
 export const alt = 'Syed Akhter Hussain — Full Stack Web Developer, Nagaon, Assam'
 export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
+export const contentType = 'image/jpg'
 
 export default async function Image() {
   return new ImageResponse(
@@ -66,7 +66,7 @@ export default async function Image() {
 
             {/* Avatar circle */}
             <img
-              src="https://www.syedakhterhussain.online/syed-akhter-hussain.jpg"
+              src="https://www.syedakhterhussain.online/og-banner.jpg"
               width="110"
               height="110"
               style={{ borderRadius: '50%', border: '3px solid #3fb950', objectFit: 'cover', flexShrink: 0 }}
