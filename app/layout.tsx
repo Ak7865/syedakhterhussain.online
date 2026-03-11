@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       'Professional web developer in Nagaon, Assam. React · PHP · Node.js · Firebase · MySQL. Founder of 8BitBannar. Available for freelance across India.',
     images: [
       {
-        url: "https://www.syedakhterhussain.online/og-banner.png",
+        url: "https://www.syedakhterhussain.online/og-banner.jpeg",
         width: 1200,
         height: 630,
         alt: 'Syed Akhter Hussain — Full Stack Web Developer, Nagaon Assam',
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     description: 'Full Stack Web Developer from Nagaon, Assam. React, PHP, Node.js, Firebase. Founder of 8BitBannar.',
     images: [
       {
-        url: "https://www.syedakhterhussain.online/og-banner.png",
+        url: "https://www.syedakhterhussain.online/og-banner.jpeg",
         width: 1200,
         height: 630,
         alt:"Syed Akhter Hussain — Full Stack Web Developer, Nagaon, Assam",
@@ -208,7 +208,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* WhatsApp reads these directly — must be explicit */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:type" content="https://syedakhterhussain.online/og-banner.png" />
+        <meta property="og:image:type" content="https://www.syedakhterhussain.online/og-banner.jpeg" />
         <meta property="og:url" content="https://www.syedakhterhussain.online" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Syed Akhter Hussain | Web Developer in Nagaon, Assam" />
