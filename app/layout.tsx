@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-const SITE_URL = 'https://syedakhterhussain.online'
+const SITE_URL = 'https://www.syedakhterhussain.online'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://syedakhterhussain.online'),
+  metadataBase: new URL('https://www.syedakhterhussain.online'),
   title: {
     default: 'Syed Akhter Hussain | Web Developer in Nagaon, Assam',
     template: '%s | Syed Akhter Hussain',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       'Professional web developer in Nagaon, Assam. React · PHP · Node.js · Firebase · MySQL. Founder of 8BitBannar. Available for freelance across India.',
     images: [
       {
-        url: `${SITE_URL}/og-banner.png`,
+        url: "https://www.syedakhterhussain.online/og-banner.png",
         width: 1200,
         height: 630,
         alt: 'Syed Akhter Hussain — Full Stack Web Developer, Nagaon Assam',
