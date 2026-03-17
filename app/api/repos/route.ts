@@ -1,15 +1,15 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
-const USERNAME = "Ak7865"
+const USERNAME = "Ak7865";
 
 export async function GET() {
   try {
     const res = await fetch(
       `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=6`,
-      { next: { revalidate: 3600 } }
-    )
+      { next: { revalidate: 3600 } },
+    );
 
-    const data = await res.json()
+    const data = await res.json();
 
     const repos = data
       .filter((repo: any) => !repo.fork)
@@ -19,12 +19,11 @@ export async function GET() {
         desc: repo.description || "No description",
         lang: repo.language || "Unknown",
         stars: repo.stargazers_count,
-        url: repo.html_url
-      }))
+        url: repo.html_url,
+      }));
 
-    return NextResponse.json(repos)
-
+    return NextResponse.json(repos);
   } catch {
-    return NextResponse.json([])
+    return NextResponse.json([]);
   }
 }

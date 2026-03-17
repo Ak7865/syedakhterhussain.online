@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Head from "next/head";
 
 const SITE_URL = "https://www.syedakhterhussain.online";
 
@@ -85,10 +86,8 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
 };
 
-// ── Schema 1: Person ──────────────────────────────────────────────────────────
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -181,7 +180,6 @@ const personSchema = {
   sameAs: ["https://github.com/Ak7865", "https://8bitbannar.in/", SITE_URL],
 };
 
-// ── Schema 2: LocalBusiness — ranks for "web developer in Nagaon/Assam" ──────
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -244,7 +242,6 @@ const localBusinessSchema = {
   priceRange: "₹₹",
 };
 
-// ── Schema 3: WebSite ─────────────────────────────────────────────────────────
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -264,8 +261,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-IN">
-      <head>
-        {/* 3 schema types = Person + LocalBusiness + WebSite */}
+      <Head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -281,10 +277,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
 
-        {/* WhatsApp reads these directly — must be explicit */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="article:published_time" content="2026-03-10T00:00:00+05:30"/>
+        <meta
+          property="article:published_time"
+          content="2026-03-10T00:00:00+05:30"
+        />
         <meta
           property="og:image"
           content="https://www.syedakhterhussain.online/og-banner.jpg"
@@ -299,16 +297,42 @@ export default function RootLayout({
           content="Syed Akhter Hussain | Web Developer in Nagaon, Assam"
         />
 
-        {/* Geo meta — local search ranking boost */}
         <meta name="geo.region" content="IN-AS" />
         <meta name="geo.placename" content="Nagaon, Assam, India" />
         <meta name="geo.position" content="26.3452;92.6844" />
         <meta name="ICBM" content="26.3452, 92.6844" />
 
         <meta httpEquiv="content-language" content="en-IN" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Syed Akhter Hussain | Web Developer — Nagaon, Assam"
+        />
+        <meta
+          name="twitter:description"
+          content="Full Stack Web Developer from Nagaon by Syed Akhter Hussain"
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.syedakhterhussain.online/og-banner.jpg"
+        />
+
+        <meta name="whatsapp:card" content="summary_large_image" />
+        <meta
+          name="whatsapp:title"
+          content="Syed Akhter Hussain | Web Developer — Nagaon, Assam"
+        />
+        <meta
+          name="whatsapp:description"
+          content="Full Stack Web Developer from Nagaon by Syed Akhter Hussain"
+        />
+        <meta
+          name="whatsapp:image"
+          content="https://www.syedakhterhussain.online/og-banner.jpg"
+        />
         <link rel="alternate" hrefLang="en-IN" href={SITE_URL} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
+      </Head>
       <body>
         {children}
         <script
