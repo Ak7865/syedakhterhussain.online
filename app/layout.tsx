@@ -253,6 +253,21 @@ const websiteSchema = {
   publisher: { "@id": `${SITE_URL}/#person` },
   inLanguage: "en-IN",
 };
+const gitHubSchema=
+  {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Syed Akhter Hussain",
+  "alternateName": [
+    "Ak7865",
+    "Mr. AK"
+  ],
+  "sameAs": [
+    "https://github.com/Ak7865",
+    "https://8bitbannar.online",
+    "https://www.syedakhterhussain.online"
+  ]
+  };
 
 export default function RootLayout({
   children,
