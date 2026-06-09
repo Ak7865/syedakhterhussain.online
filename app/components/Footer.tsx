@@ -91,8 +91,7 @@ export default function Footer() {
                 />
               </a>
             );
-          })}
-          <a href="https://websitelaunches.com/site/syedakhterhussain.online" target="_blank" rel="noopener">
+        <a href="https://websitelaunches.com/site/syedakhterhussain.online" target="_blank" rel="noopener">
   <img
     src="https://websitelaunches.com/badge/syedakhterhussain.online.svg"
     alt="Established online - Public launch record"
@@ -100,6 +99,8 @@ export default function Footer() {
     height="55"
   >
 </a>
+          })}
+          
         </div>
       </div>
     </footer>
