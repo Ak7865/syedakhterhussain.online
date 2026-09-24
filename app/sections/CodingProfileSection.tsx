@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useInView } from "react-intersection-observer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 type ContributionDay = {
   date: string;
