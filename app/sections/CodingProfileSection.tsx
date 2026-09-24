@@ -48,7 +48,7 @@ export default function CodingProfilesSection() {
 
           <div className="stats-row">
             <div className="stat-card">
-              <img src="https://github-readme-stats.vercel.app/api?username=Ak7865&theme=synthwave&count_private=true" />
+              <img src="https://github-readme-stats.vercel.app/api?username=Ak7865&show_icons=true&theme=synthwave&hide_border=false&include_all_commits=true&count_private=true" />
             </div>
 
             <div className="stat-card">
