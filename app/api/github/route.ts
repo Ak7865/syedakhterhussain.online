@@ -19,7 +19,7 @@ type LanguageResult = {
 export async function GET() {
   try {
     // ============================================================
-    // 1. GET GITHUB CONTRIBUTION CALENDAR
+    // 1. FETCH GITHUB CONTRIBUTION CALENDAR
     // ============================================================
 
     const contributionsRes = await fetch(
@@ -45,43 +45,33 @@ export async function GET() {
 
     const cells: ContributionCell[] = [];
 
+    // ============================================================
+    // 2. PARSE CONTRIBUTION CELLS
+    // ============================================================
+
     /*
-     * GitHub contribution cells look approximately like:
+     * GitHub normally renders contribution cells similar to:
      *
      * <td
      *   data-date="2026-09-24"
      *   data-level="2"
      *   aria-label="5 contributions on September 24, 2026"
      * >
-     *
-     * We extract:
-     * - date
-     * - contribution level
-     * - actual contribution count
      */
 
     const cellRegex =
       /<td[^>]*data-date="([^"]+)"[^>]*data-level="(\d)"[^>]*aria-label="([^"]*)"[^>]*>/gi;
 
-    let match;
+    let match: RegExpExecArray | null;
 
     while ((match = cellRegex.exec(html)) !== null) {
       const date = match[1];
       const level = Number(match[2]);
       const ariaLabel = match[3];
 
-      /*
-       * Extract number from:
-       *
-       * "5 contributions on September 24, 2026"
-       *
-       * Also handles:
-       *
-       * "1 contribution on ..."
-       * "0 contributions on ..."
-       */
-
-      const countMatch = ariaLabel.match(/([\d,]+)\s+contribution/i);
+      const countMatch = ariaLabel.match(
+        /([\d,]+)\s+contribution/i,
+      );
 
       const count = countMatch
         ? Number(countMatch[1].replace(/,/g, ""))
@@ -95,16 +85,19 @@ export async function GET() {
     }
 
     /*
-     * Some GitHub HTML variations may put aria-label before
-     * data-level, so try a second parser if the first one
-     * doesn't find anything.
+     * GitHub can change the attribute order.
+     *
+     * If the first parser didn't work, try a more flexible
+     * parser that finds data-date/data-level independently.
      */
 
     if (cells.length === 0) {
-      const fallbackRegex =
+      const fallbackCellRegex =
         /<td[^>]*data-date="([^"]+)"[^>]*data-level="(\d)"[^>]*>/gi;
 
-      while ((match = fallbackRegex.exec(html)) !== null) {
+      while (
+        (match = fallbackCellRegex.exec(html)) !== null
+      ) {
         cells.push({
           date: match[1],
           level: Number(match[2]),
@@ -114,41 +107,13 @@ export async function GET() {
     }
 
     if (cells.length === 0) {
-      throw new Error("GitHub contribution cells could not be parsed");
-    }
-
-    // ============================================================
-    // 2. TOTAL CONTRIBUTIONS
-    // ============================================================
-
-    let total = 0;
-
-    /*
-     * First try GitHub's visible text.
-     */
-
-    const totalMatch = html.match(
-      /([\d,]+)\s+contributions?\s+in\s+the\s+last\s+year/i,
-    );
-
-    if (totalMatch) {
-      total = Number(totalMatch[1].replace(/,/g, ""));
-    }
-
-    /*
-     * If GitHub changes the text structure, calculate the total
-     * from the contribution cells.
-     */
-
-    if (!total) {
-      total = cells.reduce(
-        (sum, cell) => sum + cell.count,
-        0,
+      throw new Error(
+        "Unable to parse GitHub contribution calendar",
       );
     }
 
     // ============================================================
-    // 3. CURRENT STREAK
+    // 3. SORT CONTRIBUTIONS BY DATE
     // ============================================================
 
     const sortedCells = [...cells].sort(
@@ -156,6 +121,44 @@ export async function GET() {
         new Date(a.date).getTime() -
         new Date(b.date).getTime(),
     );
+
+    // ============================================================
+    // 4. TOTAL CONTRIBUTIONS
+    // ============================================================
+
+    let total = 0;
+
+    /*
+     * GitHub's contribution page normally contains:
+     *
+     * "XXX contributions in the last year"
+     */
+
+    const totalMatch = html.match(
+      /([\d,]+)\s+contributions?\s+in\s+the\s+last\s+year/i,
+    );
+
+    if (totalMatch) {
+      total = Number(
+        totalMatch[1].replace(/,/g, ""),
+      );
+    }
+
+    /*
+     * If GitHub's text changes, calculate the total from
+     * the individual contribution cells.
+     */
+
+    if (!total) {
+      total = sortedCells.reduce(
+        (sum, cell) => sum + cell.count,
+        0,
+      );
+    }
+
+    // ============================================================
+    // 5. CURRENT STREAK
+    // ============================================================
 
     let currentStreak = 0;
 
@@ -168,7 +171,7 @@ export async function GET() {
     }
 
     // ============================================================
-    // 4. LONGEST STREAK
+    // 6. LONGEST STREAK
     // ============================================================
 
     let longestStreak = 0;
@@ -177,6 +180,7 @@ export async function GET() {
     for (const cell of sortedCells) {
       if (cell.count > 0) {
         runningStreak++;
+
         longestStreak = Math.max(
           longestStreak,
           runningStreak,
@@ -187,7 +191,34 @@ export async function GET() {
     }
 
     // ============================================================
-    // 5. GET PUBLIC REPOSITORIES
+    // 7. CONVERT CELLS INTO WEEKS
+    // ============================================================
+
+    /*
+     * Your frontend expects:
+     *
+     * contributions.weeks[]
+     *   └── contributionDays[]
+     */
+
+    const weeks = [];
+
+    for (let i = 0; i < sortedCells.length; i += 7) {
+      const weekCells = sortedCells.slice(i, i + 7);
+
+      weeks.push({
+        contributionDays: weekCells.map(
+          (cell) => ({
+            date: cell.date,
+            contributionCount: cell.count,
+            contributionLevel: `LEVEL_${cell.level}`,
+          }),
+        ),
+      });
+    }
+
+    // ============================================================
+    // 8. FETCH PUBLIC GITHUB REPOSITORIES
     // ============================================================
 
     const reposRes = await fetch(
@@ -212,114 +243,126 @@ export async function GET() {
     const repos = await reposRes.json();
 
     // ============================================================
-    // 6. GET LANGUAGES FROM EACH REPOSITORY
+    // 9. FILTER OWN NON-FORK REPOSITORIES
     // ============================================================
-
-    const languageTotals: Record<string, number> = {};
-
-    /*
-     * Ignore forks because they can heavily distort the
-     * language percentages.
-     */
 
     const ownRepos = repos.filter(
       (repo: {
         fork: boolean;
-        owner?: { login?: string };
+        owner?: {
+          login?: string;
+        };
       }) =>
         !repo.fork &&
         repo.owner?.login?.toLowerCase() ===
           GITHUB_USERNAME.toLowerCase(),
     );
 
-    /*
-     * Fetch language statistics for repositories in parallel.
-     */
+    // ============================================================
+    // 10. FETCH LANGUAGE DATA
+    // ============================================================
+
+    const languageTotals: Record<string, number> = {};
 
     const languageResponses = await Promise.all(
-      ownRepos.map(async (repo: { name: string }) => {
-        try {
-          const response = await fetch(
-            `https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`,
-            {
-              headers: {
-                "User-Agent": "Ak7865-Portfolio",
-                Accept: "application/vnd.github+json",
+      ownRepos.map(
+        async (repo: { name: string }) => {
+          try {
+            const response = await fetch(
+              `https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`,
+              {
+                headers: {
+                  "User-Agent": "Ak7865-Portfolio",
+                  Accept:
+                    "application/vnd.github+json",
+                },
+                next: {
+                  revalidate: 3600,
+                },
               },
-              next: {
-                revalidate: 3600,
-              },
-            },
-          );
+            );
 
-          if (!response.ok) {
+            if (!response.ok) {
+              return {};
+            }
+
+            return await response.json();
+          } catch {
             return {};
           }
-
-          return await response.json();
-        } catch {
-          return {};
-        }
-      }),
+        },
+      ),
     );
 
     // ============================================================
-    // 7. COMBINE LANGUAGE BYTES
+    // 11. COMBINE LANGUAGE BYTE COUNTS
     // ============================================================
 
     for (const repoLanguages of languageResponses) {
       for (const [language, bytes] of Object.entries(
         repoLanguages,
       )) {
-        if (typeof bytes !== "number") continue;
+        if (typeof bytes !== "number") {
+          continue;
+        }
 
         languageTotals[language] =
-          (languageTotals[language] || 0) + bytes;
+          (languageTotals[language] || 0) +
+          bytes;
       }
     }
 
     // ============================================================
-    // 8. CALCULATE LANGUAGE PERCENTAGES
+    // 12. CALCULATE LANGUAGE PERCENTAGES
     // ============================================================
 
     const totalLanguageBytes = Object.values(
       languageTotals,
-    ).reduce((sum, bytes) => sum + bytes, 0);
+    ).reduce(
+      (sum, bytes) => sum + bytes,
+      0,
+    );
 
-    const languages: LanguageResult[] = Object.entries(
-      languageTotals,
-    )
-      .map(([name, bytes]) => ({
-        name,
-        bytes,
-        percentage:
-          totalLanguageBytes > 0
-            ? Number(
-                (
-                  (bytes / totalLanguageBytes) *
-                  100
-                ).toFixed(1),
-              )
-            : 0,
-      }))
-      .sort((a, b) => b.bytes - a.bytes)
-      .slice(0, 8);
+    const languages: LanguageResult[] =
+      Object.entries(languageTotals)
+        .map(([name, bytes]) => ({
+          name,
+          bytes,
+          percentage:
+            totalLanguageBytes > 0
+              ? Number(
+                  (
+                    (bytes /
+                      totalLanguageBytes) *
+                    100
+                  ).toFixed(1),
+                )
+              : 0,
+        }))
+        .sort(
+          (a, b) => b.bytes - a.bytes,
+        )
+        .slice(0, 8);
 
     // ============================================================
-    // 9. RETURN EVERYTHING
+    // 13. RETURN DATA
     // ============================================================
 
     return NextResponse.json(
       {
-        username: GITHUB_USERNAME,
+        user: {
+          login: GITHUB_USERNAME,
+          name: "Syed Akhter Hussain",
+          avatarUrl: `https://github.com/${GITHUB_USERNAME}.png`,
+          url: `https://github.com/${GITHUB_USERNAME}`,
+        },
 
-        cells,
-
-        total,
-
-        currentStreak,
-
-        longestStreak,
+        contributions: {
+          total,
+          currentStreak,
+          longestStreak,
+          weeks,
+        },
 
         languages,
 
@@ -333,24 +376,37 @@ export async function GET() {
       },
     );
   } catch (error) {
-    console.error("GitHub API error:", error);
+    // ============================================================
+    // ERROR RESPONSE
+    // ============================================================
+
+    console.error(
+      "GitHub API error:",
+      error,
+    );
 
     /*
-     * IMPORTANT:
-     *
-     * Do NOT generate random fake contribution data.
-     *
-     * A portfolio should never display fake GitHub activity.
+     * Do NOT generate fake/random contribution data.
      */
 
     return NextResponse.json(
       {
-        username: GITHUB_USERNAME,
-        cells: [],
-        total: 0,
-        currentStreak: 0,
-        longestStreak: 0,
+        user: {
+          login: GITHUB_USERNAME,
+          name: "Syed Akhter Hussain",
+          avatarUrl: `https://github.com/${GITHUB_USERNAME}.png`,
+          url: `https://github.com/${GITHUB_USERNAME}`,
+        },
+
+        contributions: {
+          total: 0,
+          currentStreak: 0,
+          longestStreak: 0,
+          weeks: [],
+        },
+
         languages: [],
+
         fallback: true,
         error: "Unable to load GitHub data",
       },
