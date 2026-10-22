@@ -1,365 +1,176 @@
-import type { Metadata } from "next";
+
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import "./globals.css";
-import Head from "next/head";
 
 const SITE_URL = "https://www.syedakhterhussain.online";
+const COMPANY_URL = "https://8bitbannar.in";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.syedakhterhussain.online"),
+  metadataBase: new URL(SITE_URL),
+
   title: {
-    default: "Syed Akhter Hussain | Web Developer in Nagaon, Assam",
+    default: "Syed Akhter Hussain | Web Developer in Assam",
     template: "%s | Syed Akhter Hussain",
   },
+
   description:
-    "Syed Akhter Hussain — professional web developer in Nagaon, Assam. Expert in React, PHP, Node.js, MySQL & Firebase. Founder of 8BitBannar WebTech. Available for freelance projects across Assam, Guwahati & all India.",
-  keywords: [
-    "Syed Akhter Hussain",
-    "Syed Akhter Hussain web developer",
-    "Syed Akhter Hussain portfolio",
-    "web developer in Nagaon",
-    "web developer Nagaon Assam",
-    "web developer in Assam",
-    "web developer Assam",
-    "web developer in Guwahati",
-    "web developer Guwahati",
-    "web developer Northeast India",
-    "freelance web developer Assam",
-    "freelance web developer Nagaon",
-    "website developer Nagaon",
-    "website developer Assam",
-    "full stack web developer India",
-    "React developer Assam",
-    "PHP developer Assam",
-    "hire web developer Assam",
-    "website design Nagaon",
-    "website development Assam",
-    "8BitBannar",
-    "8BitBannar web development",
-    "React developer India",
-    "Node.js developer Assam",
-    "Firebase developer India",
-    "MySQL developer Assam",
+    "Syed Akhter Hussain is a web developer from Nagaon, Assam, specializing in React, JavaScript, PHP, Node.js, MySQL and Firebase. Founder of 8BitBannar. Explore projects, skills and web development services.",
+
+  applicationName: "Syed Akhter Hussain Portfolio",
+  authors: [
+    {
+      name: "Syed Akhter Hussain",
+      url: SITE_URL,
+    },
   ],
-  authors: [{ name: "Syed Akhter Hussain", url: SITE_URL }],
   creator: "Syed Akhter Hussain",
   publisher: "Syed Akhter Hussain",
-  alternates: { canonical: SITE_URL },
+
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": "/",
+    },
+  },
+
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: SITE_URL,
-    siteName: "Syed Akhter Hussain — Web Developer",
-    title: "Syed Akhter Hussain | Web Developer in Nagaon, Assam",
+    siteName: "Syed Akhter Hussain Portfolio",
+
+    title: "Syed Akhter Hussain | Web Developer in Assam",
+
     description:
-      "Professional web developer in Nagaon, Assam. React · PHP · Node.js · Firebase · MySQL. Founder of 8BitBannar. Available for freelance across India.",
+      "Explore the portfolio, web development projects and technical skills of Syed Akhter Hussain, founder of 8BitBannar in Assam.",
+
     images: [
       {
-        url: "https://www.syedakhterhussain.online/og-banner.jpg",
+        url: "/og-banner.jpg",
         width: 1200,
         height: 630,
-        alt: "Syed Akhter Hussain — Full Stack Web Developer, Nagaon Assam",
+        alt: "Syed Akhter Hussain — Web Developer and Founder of 8BitBannar",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Syed Akhter Hussain | Web Developer — Nagaon, Assam",
+    title: "Syed Akhter Hussain | Web Developer",
     description:
-      "Full Stack Web Developer from Nagaon, Assam. React, PHP, Node.js, Firebase. Founder of 8BitBannar.",
+      "Web developer from Assam. Explore React, JavaScript, PHP, Node.js, Firebase and full-stack development projects.",
     images: [
       {
-        url: "https://www.syedakhterhussain.online/og-banner.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Syed Akhter Hussain — Full Stack Web Developer, Nagaon, Assam",
+        url: "/og-banner.jpg",
+        alt: "Syed Akhter Hussain — Web Developer",
       },
     ],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#212529",
 };
 
 const personSchema = {
-  "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${SITE_URL}/#person`,
   name: "Syed Akhter Hussain",
-  givenName: "Syed Akhter",
-  familyName: "Hussain",
-  jobTitle: "Full Stack Web Developer",
-  description:
-    "Professional web developer in Nagaon, Assam specializing in React, PHP, Node.js, MySQL and Firebase. Founder of 8BitBannar WebTech.",
+  alternateName: ["Ak7865", "Mr. AK"],
   url: SITE_URL,
+
   image: {
     "@type": "ImageObject",
-    url: "https://www.syedakhterhussain.online/syed-akhter-hussain.jpg",
-    width: 800,
-    height: 800,
+    url: `${SITE_URL}/syed-akhter-hussain.jpg`,
   },
-  email: "ah076145@gmail.com",
-  telephone: "+91-9127222171",
-  birthDate: "2001-02-13",
-  nationality: { "@type": "Country", name: "India" },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Nagaon",
-    addressRegion: "Assam",
-    postalCode: "782003",
-    addressCountry: "IN",
-  },
-  geo: { "@type": "GeoCoordinates", latitude: "26.3452", longitude: "92.6844" },
-  alumniOf: [
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Barak Valley Engineering College",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Karimganj",
-        addressRegion: "Assam",
-        addressCountry: "IN",
-      },
-    },
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Nalbari Polytechnic",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Nalbari",
-        addressRegion: "Assam",
-        addressCountry: "IN",
-      },
-    },
-  ],
+
+  jobTitle: "Web Developer",
+  description:
+    "Web developer from Nagaon, Assam, working with React, JavaScript, PHP, Node.js, MySQL and Firebase. Founder of 8BitBannar.",
+
   knowsAbout: [
     "Web Development",
-    "Full Stack Development",
-    "React.js",
-    "PHP",
-    "Node.js",
+    "Full-Stack Development",
+    "React",
     "JavaScript",
+    "Node.js",
+    "PHP",
     "MySQL",
     "Firebase",
-    "Python",
-    "Java",
-    "HTML5",
-    "CSS3",
+    "HTML",
+    "CSS",
+    "REST APIs",
   ],
-  hasOccupation: {
-    "@type": "Occupation",
-    name: "Web Developer",
-    occupationLocation: { "@type": "City", name: "Nagaon, Assam, India" },
-    skills: "React, PHP, Node.js, MySQL, Firebase, JavaScript",
-  },
-  worksFor: {
-    "@type": "Organization",
-    name: "8BitBannar",
-    url: "https://8bitbannar.in",
-  },
-  makesOffer: {
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "Service",
-      name: "Web Development Services",
-      areaServed: [
-        { "@type": "City", name: "Nagaon" },
-        { "@type": "City", name: "Guwahati" },
-        { "@type": "State", name: "Assam" },
-        { "@type": "Country", name: "India" },
-      ],
-    },
-  },
-  sameAs: ["https://github.com/Ak7865", "https://8bitbannar.in/", SITE_URL],
-};
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/#business`,
-  name: "8BitBannar — Web Development by Syed Akhter Hussain",
-  description:
-    "Professional web development services in Nagaon, Assam. React, PHP, Node.js, Firebase, MySQL.",
-  url: "https://8bitbannar.in",
-  telephone: "+91-9127222171",
-  email: "ah076145@gmail.com",
-  founder: { "@id": `${SITE_URL}/#person` },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Nagaon",
-    addressRegion: "Assam",
-    postalCode: "782003",
-    addressCountry: "IN",
+  worksFor: {
+    "@id": `${COMPANY_URL}/#organization`,
   },
-  geo: { "@type": "GeoCoordinates", latitude: "26.3452", longitude: "92.6844" },
-  areaServed: ["Nagaon", "Guwahati", "Assam", "Northeast India", "India"],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Web Development Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Website Design & Development",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "React.js Web Applications" },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "PHP & MySQL Backend Development",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Website Maintenance & Support",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Firebase & Cloud Integration",
-        },
-      },
-    ],
-  },
-  openingHours: "Mo-Sa 09:00-20:00",
-  priceRange: "₹₹",
+
+  sameAs: [
+    "https://github.com/Ak7865",
+    "https://8bitbannar.in/",
+    "https://www.linkedin.com/in/syed-akhter-hussain-026361233",
+    "https://instagram.com/syed_akhter_hussain",
+  ],
 };
 
 const websiteSchema = {
-  "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
   url: SITE_URL,
   name: "Syed Akhter Hussain Portfolio",
   description:
-    "Portfolio of Syed Akhter Hussain — Web Developer in Nagaon, Assam",
-  publisher: { "@id": `${SITE_URL}/#person` },
+    "Official portfolio of Syed Akhter Hussain, web developer and founder of 8BitBannar.",
   inLanguage: "en-IN",
+  publisher: {
+    "@id": `${SITE_URL}/#person`,
+  },
 };
-const gitHubSchema=
-  {
+
+const portfolioSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Syed Akhter Hussain",
-  "alternateName": [
-    "Ak7865",
-    "Mr. AK"
-  ],
-  "sameAs": [
-    "https://github.com/Ak7865",
-    "https://8bitbannar.online",
-    "https://www.syedakhterhussain.online"
-  ]
-  };
+  "@graph": [personSchema, websiteSchema],
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
     <html lang="en-IN">
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          property="article:published_time"
-          content="2026-03-10T00:00:00+05:30"
-        />
-        <meta
-          property="og:image"
-          content="https://www.syedakhterhussain.online/og-banner.jpg"
-        />
-        <meta
-          property="og:url"
-          content="https://www.syedakhterhussain.online"
-        />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Syed Akhter Hussain | Web Developer in Nagaon, Assam"
-        />
-
-        <meta name="geo.region" content="IN-AS" />
-        <meta name="geo.placename" content="Nagaon, Assam, India" />
-        <meta name="geo.position" content="26.3452;92.6844" />
-        <meta name="ICBM" content="26.3452, 92.6844" />
-
-        <meta httpEquiv="content-language" content="en-IN" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Syed Akhter Hussain | Web Developer — Nagaon, Assam"
-        />
-        <meta
-          name="twitter:description"
-          content="Full Stack Web Developer from Nagaon by Syed Akhter Hussain"
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.syedakhterhussain.online/og-banner.jpg"
-        />
-
-        <meta name="whatsapp:card" content="summary_large_image" />
-        <meta
-          name="whatsapp:title"
-          content="Syed Akhter Hussain | Web Developer — Nagaon, Assam"
-        />
-        <meta
-          name="whatsapp:description"
-          content="Full Stack Web Developer from Nagaon by Syed Akhter Hussain"
-        />
-        <meta
-          name="whatsapp:image"
-          content="https://www.syedakhterhussain.online/og-banner.jpg"
-        />
-        <link rel="alternate" hrefLang="en-IN" href={SITE_URL} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
       <body>
         {children}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              personSchema,
-              localBusinessSchema,
-              websiteSchema,
-            ]),
+            __html: JSON.stringify(portfolioSchema).replace(
+              /</g,
+              "\\u003c"
+            ),
           }}
-        ></script>
+        />
       </body>
     </html>
   );
